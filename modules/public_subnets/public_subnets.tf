@@ -6,9 +6,11 @@ resource "aws_subnet" "public_subnets" {
   cidr_block        = element(var.public_subnet_cidrs, count.index)
 
   tags = {
-    Name        = "public_subnet_${replace(element(var.aws_availability_zones, count.index), "-", "_")}"
-    Project     = var.project
-    Subnet_type = "public"
+    Name                                           = "public_subnet_${replace(element(var.aws_availability_zones, count.index), "-", "_")}"
+    Project                                        = var.project
+    Subnet_type                                    = "public"
+    "kubernetes.io/cluster/${var.project}_cluster" = "shared"
+    "kubernetes.io/role/elb"                       = "1"
   }
 }
 

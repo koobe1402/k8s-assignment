@@ -6,9 +6,10 @@ resource "aws_subnet" "private_subnets" {
   cidr_block        = element(var.private_subnet_cidrs, count.index)
 
   tags =  {
-    Name        = "private_subnet_${replace(element(var.aws_availability_zones, count.index), "-", "_")}"
-    Project     = var.project
-    Subnet_type = "private"
+    Name                                           = "private_subnet_${replace(element(var.aws_availability_zones, count.index), "-", "_")}"
+    Project                                        = var.project
+    Subnet_type                                    = "private"
+    "kubernetes.io/cluster/${var.project}_cluster" = "shared"
   }
 }
 
