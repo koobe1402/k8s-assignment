@@ -35,3 +35,7 @@ output "kubeconfig" {
   value = local.kubeconfig
 }
 
+output "eks_worker_sg_id" {
+  value = module.eks_worker.eks_worker_sg_id
+}
+
